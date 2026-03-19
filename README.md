@@ -34,7 +34,8 @@ Highly dependent on peak hours and zone activity
 
 Faces frequent income loss due to micro-level disruptions
 
-(https://github.com/user-attachments/assets/e5df69ca-3eca-46d7-ac67-4998227087bc)
+![WhatsApp Image 2026-03-18 at 9 41 17 PM](https://github.com/user-attachments/assets/1db9455d-4e54-4a53-a0aa-52de4765bf0f)
+
 
 
 ## 💡 Proposed Solution
