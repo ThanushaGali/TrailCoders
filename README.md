@@ -102,7 +102,7 @@ High pollution → +₹3
 
 High traffic → +₹2
 
-👉 Final Premium: ₹25–₹35/week
+  Final Premium: ₹25–₹35/week
 
 Coverage:
 
@@ -122,9 +122,7 @@ Worker activity patterns
 
 GigShield uses predefined measurable triggers:
 
-Disruption	Condition	Action
-Heavy Rain	Rainfall > 50mm	Auto payout
-Heatwave	Temperature > 42°C	Auto payout
-Pollution	AQI > 300	Auto payout
-Order Drop	< 40% normal orders	Auto payout
-Zone Shutdown	No activity in zone	Auto payout
+| Disruption | Condition | Action |
+|-----------|----------|--------|
+| Heavy Rain | Rainfall > 50mm | Auto payout |
+| Pollution | AQI > 300 | Auto payout |
