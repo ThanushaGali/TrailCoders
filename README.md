@@ -34,6 +34,9 @@ Highly dependent on peak hours and zone activity
 
 Faces frequent income loss due to micro-level disruptions
 
+(https://github.com/user-attachments/assets/e5df69ca-3eca-46d7-ac67-4998227087bc)
+
+
 ## 💡 Proposed Solution
 
 GigShield is an AI-powered parametric insurance platform that provides automatic income protection for delivery workers.
