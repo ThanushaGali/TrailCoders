@@ -104,33 +104,23 @@ Instant Payout (UPI)
 
 GigShield follows a weekly subscription model aligned with gig worker earnings.
 
-Example:
+```
+User Data (Location + Activity)
+↓
+Base Premium (₹20/week)
+↓
+Risk Adjustments
+(Flood +₹5 | Pollution +₹3 | Traffic +₹2)
+↓
+AI Pricing Engine
+(Weather + History + Patterns)
+↓
+Final Premium (₹25–₹35/week)
+↓
+Coverage Allocation
+(₹500 – ₹1500/week)
 
-Base Premium: ₹20/week
-
-Risk Adjustments:
-
-Flood-prone zone → +₹5
-
-High pollution → +₹3
-
-High traffic → +₹2
-
-  Final Premium: ₹25–₹35/week
-
-Coverage:
-
-₹500 – ₹1500 per week
-
-AI Role:
-
-Premium is dynamically adjusted based on:
-
-- Weather predictions
-
-- Historical disruption frequency
-
-- Worker activity patterns
+```
 
 ## ⚡ Parametric Triggers
 
