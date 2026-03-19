@@ -129,3 +129,53 @@ GigShield uses predefined measurable triggers:
 | Order Drop |  < 40% normal orders | Auto payout |
 | Pollution | AQI > 300 | Auto payout |
 | Zone Shutdown | No activity in Zpne | Auto payout |
+
+## 🤖 AI/ML Integration
+
+1. Risk Assessment Model
+
+Predicts disruption probability
+
+Inputs: location, weather, historical data
+
+2. Dynamic Pricing Engine
+
+Adjusts weekly premium
+
+Based on predicted risk
+
+3. Income Prediction Model 
+
+Estimates expected earnings
+
+Calculates actual income loss
+
+4. Fraud Detection System
+
+Detects anomalies using ML
+
+Prevents misuse and fake claims
+
+## 🛡️ Fraud Detection Strategy
+
+GPS location validation
+
+Activity consistency checks
+
+Duplicate claim prevention
+
+Trust score evaluation
+
+Anomaly detection (ML-based)
+
+## 🔗 Integration Plan
+
+Weather API (OpenWeather)
+
+AQI API (pollution data)
+
+Traffic data 
+
+Delivery platform simulation
+
+Payment gateway (Razorpay test)
