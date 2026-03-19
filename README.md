@@ -28,19 +28,19 @@ GigShield is an AI-powered parametric insurance platform that provides automatic
 
 Unlike traditional insurance:
 
--No manual claim process
+- No manual claim process
 
--No paperwork
+- No paperwork
 
--No waiting time
+- No waiting time
 
 The system:
 
--Monitors real-time conditions
+- Monitors real-time conditions
 
--Detects disruptions automatically
+- Detects disruptions automatically
 
--Triggers instant payouts
+- Triggers instant payouts
 
 ## 🔥 Key Differentiators
 
@@ -70,21 +70,7 @@ This ensures intelligent fraud prevention.
 
 ## ⚙️ System Workflow
 
-User registers and selects delivery platform & location
-
-AI calculates risk score using historical and real-time data
-
-Weekly insurance plan is generated
-
-System continuously monitors environmental and operational conditions
-
-Disruption is detected at zone level
-
-Claim is automatically triggered
-
-Fraud checks are applied
-
-Instant payout is processed
+User → AI Risk Analysis → Weekly Plan → Monitoring → Disruption → Auto Claim → Payout
 
 ## 💰 Weekly Pricing Model
 
@@ -112,27 +98,11 @@ AI Role:
 
 Premium is dynamically adjusted based on:
 
-Weather predictions
+- Weather predictions
 
-Historical disruption frequency
+- Historical disruption frequency
 
-Worker activity patterns
-
-User Onboarding 
-    ↓
-AI Risk Profiling & Pricing 
-    ↓
-Weekly Policy Activation 
-    ↓
-Real-Time Monitoring (Weather, AQI, Orders) 
-    ↓
-Disruption Detection (Zone-Level) 
-    ↓
-Automatic Claim Trigger 
-    ↓
-Fraud Validation (Trust Score + GPS) 
-    ↓
-Instant Payout (UPI)
+- Worker activity patterns
 
 ## ⚡ Parametric Triggers
 
@@ -150,27 +120,27 @@ GigShield uses predefined measurable triggers:
 
 1. Risk Assessment Model
 
-Predicts disruption probability
+   Predicts disruption probability
 
-Inputs: location, weather, historical data
+   Inputs: location, weather, historical data
 
 2. Dynamic Pricing Engine
 
-Adjusts weekly premium
+   Adjusts weekly premium
 
-Based on predicted risk
+   Based on predicted risk
 
 3. Income Prediction Model 
 
-Estimates expected earnings
+   Estimates expected earnings
 
-Calculates actual income loss
+   Calculates actual income loss
 
 4. Fraud Detection System
 
-Detects anomalies using ML
+   Detects anomalies using ML
 
-Prevents misuse and fake claims
+   Prevents misuse and fake claims
 
 ## 🛡️ Fraud Detection Strategy
 
