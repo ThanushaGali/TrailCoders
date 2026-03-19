@@ -1,6 +1,6 @@
-# GigShield - AI-Powered Weekly Income Protection for Quick Commerce Delivery Workers
+# GigShield - AI Powered Weekly Income Protection for Quick Commerce Delivery Workers
 
-# 📌 Problem Statement
+## 📌 Problem Statement
 
 Quick commerce delivery partners working with platforms like Zepto, Blinkit, and Instamart operate in highly time-sensitive and hyperlocal environments. Their income is directly dependent on continuous order flow within small delivery zones.
 
@@ -8,7 +8,7 @@ However, external disruptions such as heavy rain, waterlogging, extreme heat, po
 
 Currently, there is no system that compensates for income loss caused by such uncontrollable events.
 
-# 👤 Target Persona
+## 👤 Target Persona
 
 Quick Commerce Delivery Partner (Zepto/Blinkit/Instamart)
 
@@ -22,41 +22,41 @@ Highly dependent on peak hours and zone activity
 
 Faces frequent income loss due to micro-level disruptions
 
-# 💡 Proposed Solution
+## 💡 Proposed Solution
 
-GigShield is an AI-powered parametric insurance platform that provides automatic income protection for delivery workers.
+### GigShield is an AI-powered parametric insurance platform that provides automatic income protection for delivery workers.
 
 Unlike traditional insurance:
 
-No manual claim process
+-No manual claim process
 
-No paperwork
+-No paperwork
 
-No waiting time
+-No waiting time
 
 The system:
 
-Monitors real-time conditions
+-Monitors real-time conditions
 
-Detects disruptions automatically
+-Detects disruptions automatically
 
-Triggers instant payouts
+-Triggers instant payouts
 
-#🔥 Key Differentiators
+## 🔥 Key Differentiators
 
-#Hyperlocal Zone Intelligence
+### Hyperlocal Zone Intelligence
 
 GigShield operates at a micro-zone level (2–3 km radius) instead of city-level analysis, enabling accurate detection of localized disruptions like waterlogging or traffic congestion.
 
-#Income-Based Dynamic Payout
+### Income-Based Dynamic Payout
 
 Instead of fixed payouts, the system estimates expected earnings and compensates actual income loss during disruptions.
 
-#Zero-Touch Insurance System
+### Zero-Touch Insurance System
 
 Claims are fully automated — users never need to apply manually. Detection, validation, and payout happen in real time.
 
-#Trust Score-Based Fraud Detection
+### Trust Score-Based Fraud Detection
 
 Each user is assigned a dynamic trust score based on:
 
