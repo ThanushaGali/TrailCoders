@@ -54,19 +54,19 @@ The system:
 
 - Triggers instant payouts
 
-## 🔥 Key Differentiators
+## 🚀 Why GigShield Stands Out
 
-### Hyperlocal Zone Intelligence
+- **📍 Hyperlocal Zone Intelligence**  
+  Detects disruptions at a micro-zone level (2–3 km), ensuring accurate identification of localized issues like waterlogging or traffic congestion.
 
-GigShield operates at a micro-zone level (2–3 km radius) instead of city-level analysis, enabling accurate detection of localized disruptions like waterlogging or traffic congestion.
+- **💰 Income-Based Dynamic Payout**  
+  Calculates expected earnings and compensates actual income loss instead of offering fixed payouts.
 
-### Income-Based Dynamic Payout
+- **⚡ Zero-Touch Claim System**  
+  Fully automated process — no manual claims, instant detection, validation, and payout.
 
-Instead of fixed payouts, the system estimates expected earnings and compensates actual income loss during disruptions.
-
-### Zero-Touch Insurance System
-
-Claims are fully automated — users never need to apply manually. Detection, validation, and payout happen in real time.
+- **🛡️ Smart Trust Score Fraud Detection**  
+  Uses location consistency, activity patterns, and claim history to prevent fraudulent claims.
 
 ### Trust Score-Based Fraud Detection
 
