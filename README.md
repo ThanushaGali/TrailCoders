@@ -60,11 +60,11 @@ Claims are fully automated — users never need to apply manually. Detection, va
 
 Each user is assigned a dynamic trust score based on:
 
-Location consistency
+- Location consistency
 
-Activity patterns
+- Activity patterns
 
-Claim history
+- Claim history
 
 This ensures intelligent fraud prevention.
 
@@ -117,6 +117,22 @@ Weather predictions
 Historical disruption frequency
 
 Worker activity patterns
+
+User Onboarding 
+    ↓
+AI Risk Profiling & Pricing 
+    ↓
+Weekly Policy Activation 
+    ↓
+Real-Time Monitoring (Weather, AQI, Orders) 
+    ↓
+Disruption Detection (Zone-Level) 
+    ↓
+Automatic Claim Trigger 
+    ↓
+Fraud Validation (Trust Score + GPS) 
+    ↓
+Instant Payout (UPI)
 
 ## ⚡ Parametric Triggers
 
