@@ -70,36 +70,25 @@ This ensures intelligent fraud prevention.
 
 ## ⚙️ System Workflow
 
-User Onboarding 
-   
-    ↓
-    
-AI Risk Profiling & Pricing 
-    
-    ↓
-    
-Weekly Policy Activation 
-    
-    ↓
-    
-Real-Time Monitoring (Weather, AQI, Orders) 
-    
-    ↓
-    
-Disruption Detection (Zone-Level) 
-    
-    ↓
-    
-Automatic Claim Trigger 
-    
-    ↓
-    
-Fraud Validation (Trust Score + GPS) 
-    
-    ↓
-    
-Instant Payout (UPI)
+## ⚙️ System Workflow
 
+```
+User Onboarding
+      ↓
+AI Risk Profiling & Pricing
+      ↓
+Weekly Policy Activation
+      ↓
+Real-Time Monitoring (Weather, AQI, Orders)
+      ↓
+Disruption Detection (Zone-Level)
+      ↓
+Automatic Claim Trigger
+      ↓
+Fraud Validation (Trust Score + GPS)
+      ↓
+Instant Payout (UPI)
+```
 
 ## 💰 Weekly Pricing Model
 
