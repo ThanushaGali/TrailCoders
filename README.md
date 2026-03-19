@@ -82,8 +82,6 @@ This ensures intelligent fraud prevention.
 
 ## ⚙️ System Workflow
 
-## ⚙️ System Workflow
-
 ```
 User Onboarding
       ↓
@@ -197,24 +195,28 @@ Delivery platform simulation
 Payment gateway (Razorpay test)
 
 ## 🧭 Customer Journey
+```
+Awareness
+      ↓
+Onboarding
+      ↓
+AI Profiling
+      ↓
+Plan Selection
+      ↓
+Activation
+      ↓
+Monitoring
+      ↓
+Disruption
+      ↓
+Auto Claim
+      ↓
+Payout
+      ↓
+Dashboard
 
-Awareness: Learns about GigShield through app/platform
-
-Onboarding: Signs up, selects platform & delivery zone
-
-AI Profiling: System calculates risk & suggests weekly plan
-
-Activation: User subscribes to weekly coverage
-
-Monitoring: System tracks weather, AQI, and order activity
-
-Disruption: Zone-level issue detected (rain, pollution, etc.)
-
-Auto Claim: Claim triggered automatically (no user action)
-
-Payout: Instant payout credited via UPI
-
-Dashboard: User views coverage, claims, and earnings protected
+```
 
 ## 🧱Tech Stack
 
