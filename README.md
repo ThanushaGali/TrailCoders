@@ -34,7 +34,8 @@ Highly dependent on peak hours and zone activity
 
 Faces frequent income loss due to micro-level disruptions
 
-![WhatsApp Image 2026-03-18 at 9 41 17 PM](https://github.com/user-attachments/assets/1db9455d-4e54-4a53-a0aa-52de4765bf0f)
+<img width="1202" height="712" alt="Screenshot 2026-03-18 214114" src="https://github.com/user-attachments/assets/b22917ca-44f5-47f5-8a73-4541c2acc32c" />
+
 
 
 
@@ -83,6 +84,11 @@ Each user is assigned a dynamic trust score based on:
 - Claim history
 
 This ensures intelligent fraud prevention.
+
+## 🏗️ System Architecture  
+
+<img width="1328" height="727" alt="Screenshot 2026-03-19 201242" src="https://github.com/user-attachments/assets/77e5bbba-9061-43f8-a64a-1b007f494723" />
+
 
 ## ⚙️ System Workflow
 
