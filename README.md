@@ -22,22 +22,7 @@ Currently, there is no system that compensates for income loss caused by such un
 
 ## 👤 Target Persona
 
-Quick Commerce Delivery Partner (Zepto/Blinkit/Instamart)
-
-Works in a 2–5 km delivery radius
-
-Delivers orders within 10–20 minutes
-
-Earns based on number of completed deliveries
-
-Highly dependent on peak hours and zone activity
-
-Faces frequent income loss due to micro-level disruptions
-
 <img width="1202" height="712" alt="Screenshot 2026-03-18 214114" src="https://github.com/user-attachments/assets/b22917ca-44f5-47f5-8a73-4541c2acc32c" />
-
-
-
 
 ## 💡 Proposed Solution
 
@@ -58,6 +43,28 @@ The system:
 - Detects disruptions automatically
 
 - Triggers instant payouts
+
+## 🧱Tech Stack
+
+Frontend: React.js
+
+Backend: Node.js, Express.js
+
+Database: MongoDB
+
+AI/ML: Python, Flask/FastAPI, scikit-learn
+
+APIs: OpenWeather API, AQI API, Traffic API 
+
+Monitoring: Cron Jobs / Scheduler
+
+Payment: Razorpay (Test Mode) 
+
+Tools: GitHub, Postman, VS Code
+
+## 🏗️ System Architecture  
+
+<img width="1328" height="727" alt="Screenshot 2026-03-19 201242" src="https://github.com/user-attachments/assets/77e5bbba-9061-43f8-a64a-1b007f494723" />
 
 ## 🚀 Why GigShield Stands Out
 
@@ -84,11 +91,6 @@ Each user is assigned a dynamic trust score based on:
 - Claim history
 
 This ensures intelligent fraud prevention.
-
-## 🏗️ System Architecture  
-
-<img width="1328" height="727" alt="Screenshot 2026-03-19 201242" src="https://github.com/user-attachments/assets/77e5bbba-9061-43f8-a64a-1b007f494723" />
-
 
 ## ⚙️ System Workflow
 
@@ -182,18 +184,6 @@ Trust score evaluation
 
 Anomaly detection (ML-based)
 
-## 🔗 Integration Plan
-
-Weather API (OpenWeather)
-
-AQI API (pollution data)
-
-Traffic data 
-
-Delivery platform simulation
-
-Payment gateway (Razorpay test)
-
 ## 🛡️ Adversarial Defense & Anti-Spoofing Strategy  
 
 To counter advanced GPS spoofing and coordinated fraud attacks, GigShield uses a **multi-layered behavioral intelligence system**.
@@ -250,24 +240,6 @@ Payout
 Dashboard
 
 ```
-
-## 🧱Tech Stack
-
-Frontend: React.js
-
-Backend: Node.js, Express.js
-
-Database: MongoDB
-
-AI/ML: Python, Flask/FastAPI, scikit-learn
-
-APIs: OpenWeather API, AQI API, Traffic API 
-
-Monitoring: Cron Jobs / Scheduler
-
-Payment: Razorpay (Test Mode) 
-
-Tools: GitHub, Postman, VS Code
 
 ## 🎯 Conclusion
 
