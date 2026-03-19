@@ -70,7 +70,16 @@ This ensures intelligent fraud prevention.
 
 ## ⚙️ System Workflow
 
-User → AI Risk Analysis → Weekly Plan → Monitoring → Disruption → Auto Claim → Payout
+```mermaid
+flowchart TD
+    A[User Onboarding] --> B[AI Risk Profiling]
+    B --> C[Weekly Plan Generation]
+    C --> D[Real-Time Monitoring]
+    D --> E[Disruption Detection]
+    E --> F[Auto Claim Trigger]
+    F --> G[Fraud Validation]
+    G --> H[Instant Payout]
+
 
 ## 💰 Weekly Pricing Model
 
