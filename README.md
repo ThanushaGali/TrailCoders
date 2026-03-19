@@ -184,6 +184,39 @@ Delivery platform simulation
 
 Payment gateway (Razorpay test)
 
+## 🛡️ Adversarial Defense & Anti-Spoofing Strategy  
+
+To counter advanced GPS spoofing and coordinated fraud attacks, GigShield uses a **multi-layered behavioral intelligence system**.
+
+### 🔍 Differentiation (Real vs Fake)
+- Movement pattern vs static spoofed location  
+- Delivery activity validation  
+- Behavioral consistency analysis  
+
+### 📊 Data Signals Used
+- GPS trajectory (not just location)  
+- Order activity & timestamps  
+- App usage patterns  
+- Network anomalies  
+- Zone-level disruption correlation  
+
+### 🤖 AI Defense
+- Anomaly detection (Isolation Forest)  
+- Dynamic **Trust Score system**  
+- Fraud pattern recognition  
+
+### ⚖️ UX Balance
+- Auto-approved (high trust)  
+- Soft verification (medium risk)  
+- Rejected (high fraud probability)  
+
+### 🧠 Anti-Collusion Detection
+- Detects clustered fake claims  
+- Identifies synchronized behavior  
+- Monitors sudden spike in same zone  
+
+Prevents large-scale fraud attacks like coordinated spoofing rings  
+
 ## 🧭 Customer Journey
 ```
 Awareness
