@@ -1,8 +1,5 @@
 # GigShield - AI Powered Weekly Income Protection for Quick Commerce Delivery Workers
 
-## 🎥 Video
-[Watch Here](video-link)
-
 ## 👥 Team Details
 - Team Name: TrailCoders
 - Members:
@@ -11,6 +8,9 @@
   - Lyuthika Pode
   - Vasavi Pinnam
   - Olivia Mallampalli
+ 
+## 🎥 Video
+[Watch Here](video-link)
 
 ## 📌 Problem Statement
 
@@ -236,8 +236,10 @@ Payment: Razorpay (Test Mode)
 
 Tools: GitHub, Postman, VS Code
 
-## Conclusion
+## 🎯 Conclusion
 
-GigShield transforms insurance from a reactive claim-based system into a proactive, real time income protection platform.
+GigShield transforms traditional insurance into a proactive, AI-driven income protection system for quick commerce delivery workers.
 
-It ensures that delivery workers are financially protected against unpredictable disruptions, enabling income stability in an uncertain working environment.
+By leveraging hyperlocal risk analysis, real-time monitoring, and a zero-touch claim process, the platform ensures instant financial support during unexpected disruptions.
+
+With a simple weekly pricing model and intelligent fraud detection, GigShield provides a reliable and scalable solution to protect the livelihoods of gig workers in an unpredictable environment.
