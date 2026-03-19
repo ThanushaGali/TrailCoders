@@ -70,14 +70,35 @@ This ensures intelligent fraud prevention.
 
 ## ⚙️ System Workflow
 
-flowchart LR
-    A[User Onboarding] --> B[AI Risk Profiling]
-    B --> C[Weekly Plan Generation]
-    C --> D[Real-Time Monitoring]
-    D --> E[Disruption Detection]
-    E --> F[Auto Claim Trigger]
-    F --> G[Fraud Validation]
-    G --> H[Instant Payout]
+User Onboarding 
+   
+    ↓
+    
+AI Risk Profiling & Pricing 
+    
+    ↓
+    
+Weekly Policy Activation 
+    
+    ↓
+    
+Real-Time Monitoring (Weather, AQI, Orders) 
+    
+    ↓
+    
+Disruption Detection (Zone-Level) 
+    
+    ↓
+    
+Automatic Claim Trigger 
+    
+    ↓
+    
+Fraud Validation (Trust Score + GPS) 
+    
+    ↓
+    
+Instant Payout (UPI)
 
 
 ## 💰 Weekly Pricing Model
