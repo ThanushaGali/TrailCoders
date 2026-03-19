@@ -125,4 +125,7 @@ GigShield uses predefined measurable triggers:
 | Disruption | Condition | Action |
 |-----------|----------|--------|
 | Heavy Rain | Rainfall > 50mm | Auto payout |
+| HeatWave | Temperature > 42C | Auto payout |
+| Order Drop |  < 40% normal orders | Auto payout |
 | Pollution | AQI > 300 | Auto payout |
+| Zone Shutdown | No activity in Zpne | Auto payout |
