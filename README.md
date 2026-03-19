@@ -70,8 +70,7 @@ This ensures intelligent fraud prevention.
 
 ## ⚙️ System Workflow
 
-```mermaid
-flowchart TD
+flowchart LR
     A[User Onboarding] --> B[AI Risk Profiling]
     B --> C[Weekly Plan Generation]
     C --> D[Real-Time Monitoring]
