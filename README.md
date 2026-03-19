@@ -24,7 +24,7 @@ Faces frequent income loss due to micro-level disruptions
 
 ## 💡 Proposed Solution
 
-### GigShield is an AI-powered parametric insurance platform that provides automatic income protection for delivery workers.
+GigShield is an AI-powered parametric insurance platform that provides automatic income protection for delivery workers.
 
 Unlike traditional insurance:
 
@@ -68,7 +68,7 @@ Claim history
 
 This ensures intelligent fraud prevention.
 
-# ⚙️ System Workflow
+## ⚙️ System Workflow
 
 User registers and selects delivery platform & location
 
@@ -86,7 +86,7 @@ Fraud checks are applied
 
 Instant payout is processed
 
-# 💰 Weekly Pricing Model
+## 💰 Weekly Pricing Model
 
 GigShield follows a weekly subscription model aligned with gig worker earnings.
 
@@ -118,4 +118,13 @@ Historical disruption frequency
 
 Worker activity patterns
 
+## ⚡ Parametric Triggers
 
+GigShield uses predefined measurable triggers:
+
+Disruption	Condition	Action
+Heavy Rain	Rainfall > 50mm	Auto payout
+Heatwave	Temperature > 42°C	Auto payout
+Pollution	AQI > 300	Auto payout
+Order Drop	< 40% normal orders	Auto payout
+Zone Shutdown	No activity in zone	Auto payout
