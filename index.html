@@ -1,0 +1,912 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GigShield — Parametric Insurance for Delivery Workers</title>
+<script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+<script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0e1a;
+    --bg2: #111827;
+    --bg3: #1a2235;
+    --card: #151e2e;
+    --card2: #1c2840;
+    --border: rgba(255,255,255,0.07);
+    --border2: rgba(255,255,255,0.12);
+    --text: #f0f4ff;
+    --text2: #8b9fc4;
+    --text3: #5a6f96;
+    --accent: #4f8ef7;
+    --accent2: #7c5cf4;
+    --green: #22c55e;
+    --red: #ef4444;
+    --amber: #f59e0b;
+    --cyan: #06b6d4;
+    --pink: #ec4899;
+    --orange: #f97316;
+    --shadow: 0 8px 32px rgba(0,0,0,0.4);
+    --radius: 16px;
+    --radius-sm: 10px;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background: var(--bg); color: var(--text); font-family: 'DM Sans', sans-serif; min-height: 100vh; overflow-x: hidden; }
+  ::-webkit-scrollbar { width: 4px; } ::-webkit-scrollbar-track { background: var(--bg); } ::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 4px; }
+  .font-display { font-family: 'Space Grotesk', sans-serif; }
+  .shimmer { background: linear-gradient(90deg, var(--card) 0%, var(--card2) 50%, var(--card) 100%); background-size: 200% 100%; animation: shimmer 1.5s infinite; }
+  @keyframes shimmer { 0%{background-position:200% 0} 100%{background-position:-200% 0} }
+  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.4} }
+  @keyframes spin { to{transform:rotate(360deg)} }
+  @keyframes slideUp { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
+  @keyframes payout { 0%{transform:scale(0.5);opacity:0} 60%{transform:scale(1.1)} 100%{transform:scale(1);opacity:1} }
+  @keyframes ripple { 0%{transform:scale(0);opacity:0.5} 100%{transform:scale(2.5);opacity:0} }
+  @keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-6px)} }
+  @keyframes ticker { 0%{background-position:0 0} 100%{background-position:40px 40px} }
+  .animate-slide-up { animation: slideUp 0.4s ease forwards; }
+  .animate-payout { animation: payout 0.6s cubic-bezier(0.175,0.885,0.32,1.275) forwards; }
+  .animate-pulse { animation: pulse 2s infinite; }
+  .animate-float { animation: float 3s ease-in-out infinite; }
+  input[type=range] { -webkit-appearance:none; width:100%; height:4px; border-radius:4px; background: var(--bg3); outline:none; cursor:pointer; }
+  input[type=range]::-webkit-slider-thumb { -webkit-appearance:none; width:16px; height:16px; border-radius:50%; background: var(--accent); cursor:pointer; box-shadow:0 0 8px rgba(79,142,247,0.5); }
+  .btn { padding:10px 20px; border-radius:var(--radius-sm); border:none; cursor:pointer; font-family:'DM Sans',sans-serif; font-weight:600; font-size:14px; transition:all 0.2s; }
+  .btn-primary { background: linear-gradient(135deg, var(--accent), var(--accent2)); color:white; }
+  .btn-primary:hover { transform:translateY(-1px); box-shadow:0 4px 20px rgba(79,142,247,0.4); }
+  .btn-outline { background: transparent; color: var(--text); border: 1px solid var(--border2); }
+  .btn-outline:hover { background: var(--bg3); }
+  .tag { display:inline-flex; align-items:center; gap:4px; padding:3px 10px; border-radius:20px; font-size:11px; font-weight:600; letter-spacing:0.5px; text-transform:uppercase; }
+  .tag-green { background:rgba(34,197,94,0.15); color:var(--green); border:1px solid rgba(34,197,94,0.25); }
+  .tag-red { background:rgba(239,68,68,0.15); color:var(--red); border:1px solid rgba(239,68,68,0.25); }
+  .tag-amber { background:rgba(245,158,11,0.15); color:var(--amber); border:1px solid rgba(245,158,11,0.25); }
+  .tag-blue { background:rgba(79,142,247,0.15); color:var(--accent); border:1px solid rgba(79,142,247,0.25); }
+  .tag-purple { background:rgba(124,92,244,0.15); color:var(--accent2); border:1px solid rgba(124,92,244,0.25); }
+  .card { background:var(--card); border:1px solid var(--border); border-radius:var(--radius); padding:20px; }
+  .card-glow-green { border-color:rgba(34,197,94,0.3); box-shadow:0 0 30px rgba(34,197,94,0.1); }
+  .card-glow-red { border-color:rgba(239,68,68,0.3); box-shadow:0 0 30px rgba(239,68,68,0.1); }
+  .card-glow-blue { border-color:rgba(79,142,247,0.2); box-shadow:0 0 20px rgba(79,142,247,0.08); }
+  .metric-big { font-family:'Space Grotesk',sans-serif; font-size:32px; font-weight:700; }
+  .metric-label { font-size:12px; color:var(--text2); text-transform:uppercase; letter-spacing:0.8px; font-weight:500; }
+  .zone-cell { aspect-ratio:1; border-radius:6px; display:flex; align-items:center; justify-content:center; font-size:10px; font-weight:600; cursor:pointer; transition:all 0.3s; position:relative; overflow:hidden; }
+  .progress-bar { height:6px; border-radius:4px; background:var(--bg3); overflow:hidden; }
+  .progress-fill { height:100%; border-radius:4px; transition:width 0.5s ease; }
+  .fraud-meter { position:relative; height:8px; border-radius:4px; background:var(--bg3); overflow:hidden; }
+  .sidebar { width:260px; flex-shrink:0; }
+  .main-content { flex:1; min-width:0; }
+  .grid-2 { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+  .grid-3 { display:grid; grid-template-columns:1fr 1fr 1fr; gap:16px; }
+  .grid-4 { display:grid; grid-template-columns:repeat(4,1fr); gap:12px; }
+  @media (max-width:900px) { .grid-4{grid-template-columns:repeat(2,1fr)} .grid-3{grid-template-columns:1fr 1fr} .sidebar{display:none} }
+  .nav-item { display:flex; align-items:center; gap:10px; padding:10px 14px; border-radius:var(--radius-sm); cursor:pointer; font-size:14px; color:var(--text2); transition:all 0.2s; }
+  .nav-item:hover { background:var(--bg3); color:var(--text); }
+  .nav-item.active { background:rgba(79,142,247,0.12); color:var(--accent); }
+  .nav-icon { width:18px; height:18px; }
+  .payout-overlay { position:fixed; inset:0; background:rgba(0,0,0,0.8); display:flex; align-items:center; justify-content:center; z-index:100; backdrop-filter:blur(8px); }
+  .live-dot { width:8px; height:8px; border-radius:50%; background:var(--green); display:inline-block; animation:pulse 1.5s infinite; }
+  .section-title { font-family:'Space Grotesk',sans-serif; font-size:15px; font-weight:600; color:var(--text); margin-bottom:14px; display:flex; align-items:center; gap:8px; }
+  .ai-badge { display:inline-flex; align-items:center; gap:5px; padding:4px 10px; background:rgba(124,92,244,0.15); border:1px solid rgba(124,92,244,0.3); border-radius:20px; font-size:11px; color:var(--accent2); font-weight:600; }
+  .disruption-banner { background:linear-gradient(135deg,rgba(239,68,68,0.15),rgba(245,158,11,0.1)); border:1px solid rgba(239,68,68,0.3); border-radius:var(--radius); padding:16px 20px; display:flex; align-items:center; gap:14px; animation:slideUp 0.3s ease; }
+  .onboarding { min-height:100vh; display:flex; align-items:center; justify-content:center; padding:20px; }
+  .lang-toggle { display:flex; background:var(--bg3); border-radius:20px; padding:3px; gap:2px; }
+  .lang-btn { padding:5px 12px; border-radius:16px; font-size:12px; font-weight:600; cursor:pointer; transition:all 0.2s; color:var(--text2); }
+  .lang-btn.active { background:var(--accent); color:white; }
+  .timeline-bar { display:flex; gap:3px; align-items:flex-end; height:40px; }
+  .timeline-day { flex:1; border-radius:3px 3px 0 0; min-height:4px; transition:height 0.5s; cursor:pointer; }
+  .tooltip { position:absolute; background:var(--card2); border:1px solid var(--border2); border-radius:8px; padding:8px 12px; font-size:12px; pointer-events:none; z-index:50; white-space:nowrap; }
+  .trust-ring { position:relative; display:inline-flex; align-items:center; justify-content:center; }
+  .weather-icon { font-size:28px; line-height:1; }
+  .scroll-area { max-height:300px; overflow-y:auto; }
+  .ai-thinking { display:flex; gap:4px; align-items:center; }
+  .ai-dot { width:6px; height:6px; border-radius:50%; background:var(--accent2); animation:pulse 1.2s infinite; }
+  .ai-dot:nth-child(2) { animation-delay:0.2s; }
+  .ai-dot:nth-child(3) { animation-delay:0.4s; }
+  .impact-bar { display:flex; align-items:center; gap:10px; margin:6px 0; }
+  .impact-label { font-size:13px; color:var(--text2); width:130px; flex-shrink:0; }
+  .impact-track { flex:1; height:8px; background:var(--bg3); border-radius:4px; overflow:hidden; }
+  .impact-fill { height:100%; border-radius:4px; transition:width 1s ease; }
+  #confetti-container { position:fixed; inset:0; pointer-events:none; z-index:200; }
+  .confetti-piece { position:absolute; width:8px; height:8px; border-radius:2px; animation:fall 2s ease-in forwards; }
+  @keyframes fall { 0%{transform:translateY(-20px) rotate(0deg);opacity:1} 100%{transform:translateY(100vh) rotate(720deg);opacity:0} }
+  .gradient-text { background:linear-gradient(135deg,var(--accent),var(--accent2)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
+  .noise-bg { background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E"); }
+</style>
+</head>
+<body>
+<div id="root"></div>
+<div id="confetti-container"></div>
+
+<script type="text/babel">
+const { useState, useEffect, useRef, useCallback } = React;
+
+/* ─── TRANSLATIONS ─── */
+const T = {
+  en: {
+    appName:"GigShield",tagline:"Your income is protected",
+    login:"Login",name:"Full Name",phone:"Phone Number",city:"City",
+    plan:"Choose Your Plan",weekly:"Weekly Plan",monthly:"Monthly Plan",
+    protect:"Protect My Income",dashboard:"Dashboard",simulator:"Simulator",
+    coverage:"Coverage",history:"History",
+    welcome:"Welcome back",covered:"You're covered today",
+    weather:"Weather",aqi:"Air Quality",orders:"Orders",
+    trust:"Trust Score",payout:"Payout",disruption:"Disruption Detected",
+    claimPending:"Auto Claim Filed",approved:"Approved",rejected:"Rejected",
+    rain:"Rainfall","temp":"Temperature",fraud:"Fraud Check",
+    normal:"Normal",risky:"Risky",fraudSuspected:"Fraud Suspected",
+    reliable:"Reliable",passed:"Fraud Check Passed",suspicious:"Suspicious Activity Detected",
+    whatIf:"What-If Simulator",breakdown:"AI Decision Breakdown",
+    expected:"Expected Income",actual:"Actual Income",payoutAmt:"Payout Amount",
+    viewBreakdown:"View Decision Breakdown",yourWeek:"Your Week",
+    totalProtected:"Total Protected Income",language:"Language",
+    zone:"Zone Map",logout:"Logout",liveMonitor:"Live Monitor",
+    insured:"Insured",premium:"Premium",Hindi:"हिंदी",English:"English"
+  },
+  hi: {
+    appName:"गिगशील्ड",tagline:"आपकी आय सुरक्षित है",
+    login:"लॉगिन",name:"पूरा नाम",phone:"फोन नंबर",city:"शहर",
+    plan:"अपनी योजना चुनें",weekly:"साप्ताहिक",monthly:"मासिक",
+    protect:"मेरी आय सुरक्षित करें",dashboard:"डैशबोर्ड",simulator:"सिमुलेटर",
+    coverage:"कवरेज",history:"इतिहास",
+    welcome:"वापस स्वागत है",covered:"आज आप सुरक्षित हैं",
+    weather:"मौसम",aqi:"वायु गुणवत्ता",orders:"ऑर्डर",
+    trust:"ट्रस्ट स्कोर",payout:"भुगतान",disruption:"व्यवधान पाया गया",
+    claimPending:"स्वतः दावा दाखिल",approved:"स्वीकृत",rejected:"अस्वीकृत",
+    rain:"बारिश","temp":"तापमान",fraud:"धोखाधड़ी जांच",
+    normal:"सामान्य",risky:"जोखिम भरा",fraudSuspected:"धोखाधड़ी का संदेह",
+    reliable:"विश्वसनीय",passed:"जांच पास",suspicious:"संदिग्ध गतिविधि",
+    whatIf:"क्या-अगर सिमुलेटर",breakdown:"AI निर्णय विवरण",
+    expected:"अपेक्षित आय",actual:"वास्तविक आय",payoutAmt:"भुगतान राशि",
+    viewBreakdown:"निर्णय देखें",yourWeek:"आपका सप्ताह",
+    totalProtected:"कुल संरक्षित आय",language:"भाषा",
+    zone:"जोन मैप",logout:"लॉगआउट",liveMonitor:"लाइव मॉनिटर",
+    insured:"बीमित",premium:"प्रीमियम",Hindi:"हिंदी",English:"English"
+  }
+};
+
+/* ─── HELPERS ─── */
+const rand = (a,b) => Math.round(Math.random()*(b-a)+a);
+const lerp = (a,b,t) => a+(b-a)*t;
+const clamp = (v,a,b) => Math.max(a,Math.min(b,v));
+const fmt = n => `₹${n.toLocaleString('en-IN')}`;
+
+/* ─── INITIAL STATE ─── */
+const initEnv = () => ({ rain: rand(5,30), temp: rand(28,38), aqi: rand(80,180), orders: rand(60,90) });
+const weekHistory = [
+  {day:'Mon',rain:8,temp:31,aqi:120,orders:78,payout:0,note:'Normal'},
+  {day:'Tue',rain:12,temp:33,aqi:145,orders:72,payout:0,note:'Normal'},
+  {day:'Wed',rain:67,temp:29,aqi:190,orders:28,payout:1200,note:'Rain Disruption'},
+  {day:'Thu',rain:4,temp:35,aqi:160,orders:81,payout:0,note:'Normal'},
+  {day:'Fri',rain:22,temp:40,aqi:220,orders:55,payout:0,note:'Partial'},
+  {day:'Sat',rain:3,temp:36,aqi:130,orders:88,payout:0,note:'Normal'},
+  {day:'Sun',rain:0,temp:32,aqi:95,orders:92,payout:0,note:'Normal'},
+];
+const ZONES = ['A1','A2','A3','B1','B2','B3','C1','C2','C3','D1','D2','D3'];
+
+/* ─── CONFETTI ─── */
+function spawnConfetti() {
+  const c = document.getElementById('confetti-container');
+  const colors = ['#4f8ef7','#7c5cf4','#22c55e','#f59e0b','#ec4899'];
+  for(let i=0;i<60;i++){
+    const el = document.createElement('div');
+    el.className='confetti-piece';
+    el.style.cssText=`left:${Math.random()*100}%;top:-10px;background:${colors[Math.floor(Math.random()*colors.length)]};animation-delay:${Math.random()*0.8}s;animation-duration:${1.5+Math.random()}s;transform:rotate(${Math.random()*360}deg)`;
+    c.appendChild(el);
+    setTimeout(()=>el.remove(),3000);
+  }
+}
+
+/* ─── GAUGE SVG ─── */
+function Gauge({value,max,color,size=80,label}) {
+  const r = size*0.38, cx = size/2, cy = size/2;
+  const pct = value/max;
+  const arc = pct*2*Math.PI*r*0.75;
+  const total = 2*Math.PI*r;
+  const dash = `${arc} ${total}`;
+  const rotation = -225;
+  return (
+    <svg width={size} height={size} viewBox={`0 0 ${size} ${size}`}>
+      <circle cx={cx} cy={cy} r={r} fill="none" stroke="rgba(255,255,255,0.06)" strokeWidth={size*0.08} strokeDasharray={`${total*0.75} ${total}`} strokeDashoffset="0" strokeLinecap="round" transform={`rotate(${rotation} ${cx} ${cy})`}/>
+      <circle cx={cx} cy={cy} r={r} fill="none" stroke={color} strokeWidth={size*0.08} strokeDasharray={dash} strokeLinecap="round" transform={`rotate(${rotation} ${cx} ${cy})`} style={{transition:'stroke-dasharray 0.8s ease',filter:`drop-shadow(0 0 ${size*0.08}px ${color}55)`}}/>
+      <text x={cx} y={cy-2} textAnchor="middle" dominantBaseline="middle" fill="white" style={{fontSize:size*0.2,fontWeight:700,fontFamily:'Space Grotesk,sans-serif'}}>{value}</text>
+      {label && <text x={cx} y={cy+size*0.18} textAnchor="middle" fill="rgba(255,255,255,0.4)" style={{fontSize:size*0.11}}>{label}</text>}
+    </svg>
+  );
+}
+
+/* ─── TRUST RING ─── */
+function TrustRing({score}) {
+  const color = score>70 ? '#22c55e' : score>40 ? '#f59e0b' : '#ef4444';
+  const label = score>70 ? 'Reliable' : score>40 ? 'Risky' : 'Fraud Risk';
+  return (
+    <div style={{display:'flex',alignItems:'center',gap:14}}>
+      <Gauge value={score} max={100} color={color} size={90}/>
+      <div>
+        <div style={{color:color,fontWeight:700,fontSize:16}}>{label}</div>
+        <div style={{color:'var(--text2)',fontSize:12,marginTop:4}}>Trust Score</div>
+        <div style={{marginTop:8}}>
+          {score>70?<span className="tag tag-green">✓ Verified Worker</span>:score>40?<span className="tag tag-amber">⚠ Under Review</span>:<span className="tag tag-red">⚠ Flagged</span>}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* ─── ZONE MAP ─── */
+function ZoneMap({disruptedZone,env,lang}) {
+  const t = T[lang];
+  const getZoneColor = (zone) => {
+    if(zone===disruptedZone) return {bg:'rgba(239,68,68,0.25)',border:'rgba(239,68,68,0.6)',text:'#ef4444',status:'🔴'};
+    const adjacent = ZONES.filter((_,i)=>Math.abs(ZONES.indexOf(zone)-i)<=1);
+    if(adjacent.includes(disruptedZone)) return {bg:'rgba(245,158,11,0.15)',border:'rgba(245,158,11,0.3)',text:'#f59e0b',status:'🟡'};
+    return {bg:'rgba(34,197,94,0.08)',border:'rgba(34,197,94,0.2)',text:'#22c55e',status:'🟢'};
+  };
+  return (
+    <div>
+      <div className="section-title">
+        <span>🗺️</span> {t.zone}
+        {disruptedZone && <span className="tag tag-red animate-pulse">{disruptedZone} DISRUPTED</span>}
+      </div>
+      <div style={{display:'grid',gridTemplateColumns:'repeat(4,1fr)',gap:6}}>
+        {ZONES.map(z=>{
+          const c = getZoneColor(z);
+          return (
+            <div key={z} className="zone-cell" style={{background:c.bg,border:`1px solid ${c.border}`,color:c.text,padding:'12px 4px',flexDirection:'column',gap:2}}>
+              <div style={{fontSize:16}}>{c.status}</div>
+              <div style={{fontSize:11,fontWeight:700}}>{z}</div>
+            </div>
+          );
+        })}
+      </div>
+      <div style={{display:'flex',gap:12,marginTop:10}}>
+        {[['🟢','Normal'],['🟡','Alert'],['🔴','Disrupted']].map(([ic,lb])=>(
+          <div key={lb} style={{display:'flex',alignItems:'center',gap:4,fontSize:11,color:'var(--text2)'}}>
+            <span>{ic}</span>{lb}
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+/* ─── ENV CARD ─── */
+function EnvCard({icon,label,value,unit,isAlert,threshLabel}) {
+  return (
+    <div className={`card ${isAlert?'card-glow-red':''}`} style={{padding:'16px',textAlign:'center',transition:'all 0.4s',position:'relative',overflow:'hidden'}}>
+      {isAlert && <div style={{position:'absolute',inset:0,background:'rgba(239,68,68,0.04)',pointerEvents:'none'}}/>}
+      <div className="weather-icon">{icon}</div>
+      <div style={{marginTop:8}}>
+        <div style={{fontFamily:'Space Grotesk,sans-serif',fontSize:22,fontWeight:700,color:isAlert?'var(--red)':'var(--text)',transition:'color 0.3s'}}>{value}<span style={{fontSize:13,color:'var(--text2)',marginLeft:2}}>{unit}</span></div>
+        <div className="metric-label" style={{marginTop:4}}>{label}</div>
+        {isAlert && <div className="tag tag-red" style={{marginTop:6,fontSize:10}}>{threshLabel}</div>}
+      </div>
+    </div>
+  );
+}
+
+/* ─── FRAUD PANEL ─── */
+function FraudPanel({score,env,lang}) {
+  const t = T[lang];
+  const checks = [
+    {label:'GPS Movement',pass:score>60,detail:score<=40?'Static GPS detected':'Normal mobility pattern'},
+    {label:'Claim Frequency',pass:score>50,detail:score<=50?'High claim rate detected':'Within normal range'},
+    {label:'Env. Correlation',pass:true,detail:'Weather data verified'},
+    {label:'Identity Match',pass:score>30,detail:score<=30?'KYC mismatch':'Identity confirmed'},
+  ];
+  const overall = checks.filter(c=>c.pass).length===checks.length;
+  return (
+    <div className={`card ${overall?'card-glow-green':'card-glow-red'}`}>
+      <div className="section-title">
+        <span>{overall?'🛡️':'⚠️'}</span> {t.fraud}
+        <span className={`tag ${overall?'tag-green':'tag-red'}`}>{overall?t.passed:t.suspicious}</span>
+      </div>
+      <div style={{marginBottom:12}}>
+        <TrustRing score={score}/>
+      </div>
+      {checks.map((c,i)=>(
+        <div key={i} style={{display:'flex',alignItems:'center',gap:10,padding:'7px 0',borderBottom:'1px solid var(--border)'}}>
+          <div style={{width:20,height:20,borderRadius:'50%',display:'flex',alignItems:'center',justifyContent:'center',background:c.pass?'rgba(34,197,94,0.2)':'rgba(239,68,68,0.2)',flexShrink:0}}>
+            <span style={{fontSize:11}}>{c.pass?'✓':'✗'}</span>
+          </div>
+          <div style={{flex:1}}>
+            <div style={{fontSize:13,fontWeight:600}}>{c.label}</div>
+            <div style={{fontSize:11,color:c.pass?'var(--text3)':'var(--red)',marginTop:1}}>{c.detail}</div>
+          </div>
+          <span className={`tag ${c.pass?'tag-green':'tag-red'}`} style={{fontSize:10}}>{c.pass?'OK':'FLAG'}</span>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+/* ─── AI PANEL ─── */
+function AIPanel({env,decision,lang,aiText}) {
+  const t = T[lang];
+  const [expanded,setExpanded] = useState(true);
+  const rainImpact = Math.min(100, env.rain > 50 ? ((env.rain-50)/50)*100 : 0);
+  const tempImpact = Math.min(100, env.temp > 42 ? ((env.temp-42)/8)*100 : 0);
+  const aqiImpact  = Math.min(100, env.aqi  > 300 ? ((env.aqi-300)/200)*100 : 0);
+  const orderImpact= Math.min(100, env.orders < 40 ? ((40-env.orders)/40)*100 : 0);
+  const total = (rainImpact+tempImpact+aqiImpact+orderImpact)/4;
+  const approved = total > 15 || decision==='approved';
+  const payout = approved ? clamp(Math.round(500 + total*10), 500, 1500) : 0;
+
+  const impacts = [
+    {label:`Rainfall: ${env.rain}mm`,val:rainImpact,color:'#06b6d4',icon:'🌧️'},
+    {label:`Temperature: ${env.temp}°C`,val:tempImpact,color:'#f97316',icon:'🌡️'},
+    {label:`AQI: ${env.aqi}`,val:aqiImpact,color:'#8b5cf6',icon:'💨'},
+    {label:`Order Drop: ${100-env.orders}%`,val:orderImpact,color:'#f59e0b',icon:'📦'},
+  ];
+
+  return (
+    <div className={`card ${approved?'card-glow-green':'card-glow-red'}`} style={{position:'relative',overflow:'hidden'}}>
+      <div style={{position:'absolute',top:0,right:0,width:120,height:120,background:approved?'rgba(34,197,94,0.05)':'rgba(239,68,68,0.05)',borderRadius:'50%',transform:'translate(30%,-30%)'}}/>
+      <div style={{display:'flex',alignItems:'center',justifyContent:'space-between',marginBottom:14}}>
+        <div className="section-title" style={{margin:0}}>
+          <span>🧠</span> {t.breakdown}
+          <span className="ai-badge">AI Powered</span>
+        </div>
+        <button className="btn btn-outline" style={{padding:'5px 12px',fontSize:12}} onClick={()=>setExpanded(!expanded)}>
+          {expanded?'Collapse':'Expand'}
+        </button>
+      </div>
+      {expanded && (
+        <div className="animate-slide-up">
+          <div className={`tag ${approved?'tag-green':'tag-red'}`} style={{fontSize:13,padding:'6px 16px',marginBottom:14}}>
+            {approved?'✅ CLAIM APPROVED':'❌ CLAIM REJECTED'}
+          </div>
+          {impacts.map((imp,i)=>(
+            <div key={i} className="impact-bar">
+              <div className="impact-label"><span style={{marginRight:4}}>{imp.icon}</span>{imp.label}</div>
+              <div className="impact-track">
+                <div className="impact-fill" style={{width:`${imp.val}%`,background:imp.color,boxShadow:`0 0 8px ${imp.color}55`}}/>
+              </div>
+              <div style={{fontSize:12,color:imp.val>20?imp.color:'var(--text3)',width:40,textAlign:'right',fontWeight:600}}>{Math.round(imp.val)}%</div>
+            </div>
+          ))}
+          <div style={{borderTop:'1px solid var(--border)',marginTop:14,paddingTop:14}}>
+            <div style={{display:'flex',justifyContent:'space-between',alignItems:'center'}}>
+              <div>
+                <div style={{fontSize:13,color:'var(--text2)'}}>Combined disruption score</div>
+                <div style={{fontFamily:'Space Grotesk,sans-serif',fontSize:22,fontWeight:700,color:approved?'var(--green)':'var(--text3)',marginTop:2}}>{Math.round(total)}%</div>
+              </div>
+              {approved && (
+                <div style={{textAlign:'right'}}>
+                  <div style={{fontSize:12,color:'var(--text2)'}}>Auto Payout</div>
+                  <div style={{fontFamily:'Space Grotesk,sans-serif',fontSize:24,fontWeight:700,color:'var(--green)'}}>{fmt(payout)}</div>
+                </div>
+              )}
+            </div>
+          </div>
+          {aiText && (
+            <div style={{marginTop:12,padding:'12px',background:'rgba(124,92,244,0.08)',border:'1px solid rgba(124,92,244,0.2)',borderRadius:10}}>
+              <div style={{fontSize:11,color:'var(--accent2)',fontWeight:600,marginBottom:6}}>🤖 AI REASONING</div>
+              <div style={{fontSize:12,color:'var(--text2)',lineHeight:1.6}}>{aiText}</div>
+            </div>
+          )}
+        </div>
+      )}
+    </div>
+  );
+}
+
+/* ─── WEEK STORY ─── */
+function WeekStory({lang}) {
+  const t = T[lang];
+  const totalPayout = weekHistory.reduce((s,d)=>s+d.payout,0);
+  const disruptDays = weekHistory.filter(d=>d.payout>0);
+  const colors = {Normal:'var(--green)',Partial:'var(--amber)','Rain Disruption':'var(--red)'};
+  return (
+    <div className="card">
+      <div className="section-title"><span>📖</span> {t.yourWeek}</div>
+      <div style={{display:'flex',gap:4,marginBottom:16}}>
+        {weekHistory.map((d,i)=>(
+          <div key={i} style={{flex:1,display:'flex',flexDirection:'column',alignItems:'center',gap:4}}>
+            <div style={{width:'100%',borderRadius:'4px 4px 0 0',background:colors[d.note]||'var(--green)',height:d.payout>0?60:d.orders>70?40:50,transition:'height 0.5s',cursor:'pointer'}} title={`${d.day}: ${d.note}`}/>
+            <div style={{fontSize:10,color:'var(--text2)'}}>{d.day}</div>
+          </div>
+        ))}
+      </div>
+      {weekHistory.map((d,i)=>(
+        <div key={i} style={{display:'flex',alignItems:'center',justifyContent:'space-between',padding:'7px 0',borderBottom:'1px solid var(--border)'}}>
+          <div style={{display:'flex',alignItems:'center',gap:8}}>
+            <div style={{width:8,height:8,borderRadius:'50%',background:colors[d.note]||'var(--green)'}}/>
+            <span style={{fontSize:13,fontWeight:500}}>{d.day}</span>
+            <span className={`tag ${d.note==='Normal'?'tag-green':d.note==='Partial'?'tag-amber':'tag-red'}`} style={{fontSize:10}}>{d.note}</span>
+          </div>
+          {d.payout>0 && <span style={{color:'var(--green)',fontWeight:700,fontSize:13}}>+{fmt(d.payout)}</span>}
+        </div>
+      ))}
+      <div style={{marginTop:14,padding:'14px',background:'rgba(34,197,94,0.08)',border:'1px solid rgba(34,197,94,0.2)',borderRadius:10,display:'flex',justifyContent:'space-between',alignItems:'center'}}>
+        <div style={{fontSize:13,color:'var(--text2)'}}>{t.totalProtected}</div>
+        <div style={{fontFamily:'Space Grotesk,sans-serif',fontSize:22,fontWeight:700,color:'var(--green)'}}>{fmt(totalPayout)}</div>
+      </div>
+    </div>
+  );
+}
+
+/* ─── WHAT-IF SIMULATOR ─── */
+function WhatIf({env,setEnv,lang}) {
+  const t = T[lang];
+  const sliders = [
+    {key:'rain',label:t.rain,min:0,max:100,unit:'mm',thresh:50,icon:'🌧️',color:'#06b6d4'},
+    {key:'temp',label:t.temp,min:20,max:50,unit:'°C',thresh:42,icon:'🌡️',color:'#f97316'},
+    {key:'aqi',label:t.aqi,min:0,max:500,unit:'AQI',thresh:300,icon:'💨',color:'#8b5cf6'},
+    {key:'orders',label:t.orders,min:0,max:100,unit:'%',thresh:40,icon:'📦',color:'#f59e0b',reverse:true},
+  ];
+  return (
+    <div className="card card-glow-blue">
+      <div className="section-title"><span>🎮</span> {t.whatIf} <span className="tag tag-blue">Interactive</span></div>
+      <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:16}}>
+        {sliders.map(s=>{
+          const isAlert = s.reverse ? env[s.key]<s.thresh : env[s.key]>s.thresh;
+          return (
+            <div key={s.key} style={{padding:'14px',background:'var(--bg3)',borderRadius:12,border:`1px solid ${isAlert?s.color+'44':'var(--border)'}`,transition:'all 0.3s'}}>
+              <div style={{display:'flex',justifyContent:'space-between',alignItems:'center',marginBottom:10}}>
+                <div style={{display:'flex',alignItems:'center',gap:6}}>
+                  <span style={{fontSize:18}}>{s.icon}</span>
+                  <span style={{fontSize:13,fontWeight:600}}>{s.label}</span>
+                </div>
+                <div style={{fontFamily:'Space Grotesk,sans-serif',fontSize:20,fontWeight:700,color:isAlert?s.color:'var(--text)'}}>{env[s.key]}<span style={{fontSize:11,color:'var(--text2)',marginLeft:1}}>{s.unit}</span></div>
+              </div>
+              <input type="range" min={s.min} max={s.max} value={env[s.key]} onChange={e=>setEnv(prev=>({...prev,[s.key]:+e.target.value}))} style={{'--thumb-color':s.color,accentColor:s.color}}/>
+              <div style={{display:'flex',justifyContent:'space-between',fontSize:10,color:'var(--text3)',marginTop:4}}>
+                <span>{s.min}{s.unit}</span>
+                <span style={{color:isAlert?s.color:'var(--text3)'}}>Threshold: {s.thresh}{s.unit}</span>
+                <span>{s.max}{s.unit}</span>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
+/* ─── PAYOUT MODAL ─── */
+function PayoutModal({amount,worker,onClose}) {
+  useEffect(()=>{spawnConfetti();},[]);
+  return (
+    <div className="payout-overlay" onClick={onClose}>
+      <div className="animate-payout" style={{background:'var(--card)',border:'2px solid var(--green)',borderRadius:24,padding:'40px 50px',textAlign:'center',maxWidth:380,boxShadow:'0 0 60px rgba(34,197,94,0.3)'}} onClick={e=>e.stopPropagation()}>
+        <div style={{fontSize:64,marginBottom:16,animation:'float 2s ease-in-out infinite'}}>💚</div>
+        <div className="gradient-text font-display" style={{fontSize:16,fontWeight:700,letterSpacing:1,marginBottom:8}}>INSTANT PAYOUT</div>
+        <div style={{fontFamily:'Space Grotesk,sans-serif',fontSize:48,fontWeight:800,color:'var(--green)',textShadow:'0 0 30px rgba(34,197,94,0.5)',marginBottom:4}}>₹{amount.toLocaleString('en-IN')}</div>
+        <div style={{color:'var(--text2)',fontSize:14,marginBottom:8}}>transferred to UPI</div>
+        <div style={{color:'var(--text3)',fontSize:13,marginBottom:24}}>{worker} · {new Date().toLocaleTimeString()}</div>
+        <div style={{background:'rgba(34,197,94,0.1)',border:'1px solid rgba(34,197,94,0.3)',borderRadius:12,padding:'12px 20px',marginBottom:24}}>
+          <div style={{fontSize:12,color:'var(--text2)'}}>Transaction ID</div>
+          <div style={{fontFamily:'monospace',fontSize:13,color:'var(--green)',marginTop:4}}>GS{Date.now().toString().slice(-8)}</div>
+        </div>
+        <button className="btn btn-primary" style={{width:'100%',padding:14}} onClick={onClose}>View on Dashboard</button>
+      </div>
+    </div>
+  );
+}
+
+/* ─── ONBOARDING ─── */
+function Onboarding({onLogin,lang,setLang}) {
+  const t = T[lang];
+  const [step,setStep] = useState(0);
+  const [form,setForm] = useState({name:'Rahul Kumar',phone:'9876543210',city:'Bangalore'});
+  const [plan,setPlan] = useState('weekly');
+  const cities = ['Bangalore','Mumbai','Delhi','Chennai','Hyderabad'];
+
+  if(step===0) return (
+    <div className="onboarding">
+      <div style={{width:'100%',maxWidth:420}}>
+        <div style={{textAlign:'center',marginBottom:40}}>
+          <div style={{width:72,height:72,background:'linear-gradient(135deg,var(--accent),var(--accent2))',borderRadius:20,display:'flex',alignItems:'center',justifyContent:'center',margin:'0 auto 20px',fontSize:32,boxShadow:'0 8px 30px rgba(79,142,247,0.4)',animation:'float 3s ease-in-out infinite'}}>🛡️</div>
+          <div className="font-display gradient-text" style={{fontSize:36,fontWeight:800,marginBottom:8}}>{t.appName}</div>
+          <div style={{color:'var(--text2)',fontSize:15}}>{t.tagline}</div>
+          <div style={{display:'flex',justifyContent:'center',marginTop:12}}>
+            <div className="lang-toggle">
+              {['en','hi'].map(l=>(
+                <div key={l} className={`lang-btn ${lang===l?'active':''}`} onClick={()=>setLang(l)}>{l==='en'?T.en.English:T.en.Hindi}</div>
+              ))}
+            </div>
+          </div>
+        </div>
+        <div className="card">
+          <div style={{marginBottom:16,fontSize:13,color:'var(--text2)',fontWeight:500}}>{t.login}</div>
+          {['name','phone','city'].map(f=>(
+            f==='city' ? (
+              <select key={f} value={form[f]} onChange={e=>setForm({...form,[f]:e.target.value})} style={{width:'100%',padding:'12px 16px',background:'var(--bg3)',border:'1px solid var(--border)',borderRadius:10,color:'var(--text)',fontSize:14,marginBottom:12,outline:'none'}}>
+                {cities.map(c=><option key={c}>{c}</option>)}
+              </select>
+            ) : (
+              <input key={f} type={f==='phone'?'tel':'text'} placeholder={t[f]} value={form[f]} onChange={e=>setForm({...form,[f]:e.target.value})} style={{width:'100%',padding:'12px 16px',background:'var(--bg3)',border:'1px solid var(--border)',borderRadius:10,color:'var(--text)',fontSize:14,marginBottom:12,outline:'none'}}/>
+            )
+          ))}
+          <button className="btn btn-primary" style={{width:'100%',padding:14,marginTop:4}} onClick={()=>setStep(1)}>Continue →</button>
+        </div>
+        <div style={{display:'flex',justifyContent:'center',gap:20,marginTop:20}}>
+          {[['2.3L+','Workers'],['₹1200','Avg. Payout'],['99.2%','Claim Rate']].map(([v,l])=>(
+            <div key={l} style={{textAlign:'center'}}>
+              <div className="font-display" style={{fontSize:18,fontWeight:700,color:'var(--accent)'}}>{v}</div>
+              <div style={{fontSize:11,color:'var(--text3)'}}>{l}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+
+  return (
+    <div className="onboarding">
+      <div style={{width:'100%',maxWidth:420}}>
+        <div style={{textAlign:'center',marginBottom:30}}>
+          <div className="font-display gradient-text" style={{fontSize:28,fontWeight:800,marginBottom:4}}>{t.plan}</div>
+        </div>
+        <div className="grid-2" style={{marginBottom:20}}>
+          {[
+            {id:'weekly',name:t.weekly,price:'₹35',per:'/ week',perks:['Rain coverage','Heat alerts','AQI protection','Order drops'],highlight:false},
+            {id:'monthly',name:t.monthly,price:'₹120',per:'/ month',perks:['All weekly perks','Priority payouts','₹2000 max payout','Family add-on'],highlight:true},
+          ].map(p=>(
+            <div key={p.id} onClick={()=>setPlan(p.id)} style={{background:plan===p.id?'rgba(79,142,247,0.12)':'var(--card)',border:`2px solid ${plan===p.id?'var(--accent)':'var(--border)'}`,borderRadius:'var(--radius)',padding:'20px',cursor:'pointer',transition:'all 0.2s',position:'relative'}}>
+              {p.highlight && <div className="tag tag-purple" style={{position:'absolute',top:-10,right:12,fontSize:10}}>POPULAR</div>}
+              <div style={{fontWeight:700,fontSize:15,marginBottom:4}}>{p.name}</div>
+              <div><span className="font-display" style={{fontSize:26,fontWeight:800,color:'var(--accent)'}}>{p.price}</span><span style={{fontSize:12,color:'var(--text2)'}}>{p.per}</span></div>
+              <div style={{marginTop:12}}>
+                {p.perks.map(pk=><div key={pk} style={{fontSize:12,color:'var(--text2)',padding:'3px 0',display:'flex',alignItems:'center',gap:6}}><span style={{color:'var(--green)'}}>✓</span>{pk}</div>)}
+              </div>
+            </div>
+          ))}
+        </div>
+        <button className="btn btn-primary" style={{width:'100%',padding:14}} onClick={()=>onLogin(form,plan)}>🛡️ {t.protect}</button>
+      </div>
+    </div>
+  );
+}
+
+/* ─── MAIN APP ─── */
+function GigShield() {
+  const [lang,setLang] = useState('en');
+  const t = T[lang];
+  const [user,setUser] = useState(null);
+  const [plan,setPlan] = useState(null);
+  const [env,setEnv] = useState(initEnv());
+  const [manual,setManual] = useState(false);
+  const [disruption,setDisruption] = useState(null);
+  const [showPayout,setShowPayout] = useState(false);
+  const [payoutAmt,setPayoutAmt] = useState(0);
+  const [trustScore,setTrustScore] = useState(82);
+  const [aiText,setAiText] = useState('');
+  const [aiLoading,setAiLoading] = useState(false);
+  const [activeTab,setActiveTab] = useState('dashboard');
+  const [payoutHistory,setPayoutHistory] = useState([{id:1,date:'Mon 15 Jan',amt:1200,reason:'Heavy Rain',status:'paid'}]);
+  const [disruptedZone,setDisruptedZone] = useState(null);
+  const [decision,setDecision] = useState(null);
+  const simRef = useRef(null);
+  const var_radius = 'var(--radius)';
+
+  /* ─── DETECT DISRUPTION ─── */
+  const isDisrupted = useCallback((e) => {
+    return e.rain>50 || e.temp>42 || e.aqi>300 || e.orders<40;
+  }, []);
+
+  /* ─── AI REASONING ─── */
+  const fetchAI = useCallback(async (e) => {
+    setAiLoading(true);
+    setAiText('');
+    try {
+      const resp = await fetch('https://api.anthropic.com/v1/messages',{
+        method:'POST',
+        headers:{'Content-Type':'application/json'},
+        body:JSON.stringify({
+          model:'claude-sonnet-4-20250514',
+          max_tokens:1000,
+          messages:[{role:'user',content:`You are GigShield AI, parametric insurance for Indian delivery workers.
+Current conditions: Rain=${e.rain}mm (threshold 50mm), Temperature=${e.temp}°C (threshold 42°C), AQI=${e.aqi} (threshold 300), Order Volume=${e.orders}% (threshold 40%).
+In 2 short sentences (max 60 words total), explain the payout decision in simple, friendly English that a delivery worker can understand. Start with the key trigger. Be direct and empathetic.`}]
+        })
+      });
+      const data = await resp.json();
+      const text = data.content?.map(b=>b.text||'').join('');
+      setAiText(text);
+    } catch(err) {
+      setAiText('AI analysis unavailable. Decision based on environmental thresholds.');
+    }
+    setAiLoading(false);
+  },[]);
+
+  /* ─── SIMULATION ENGINE ─── */
+  useEffect(()=>{
+    if(!user || manual) return;
+    simRef.current = setInterval(()=>{
+      setEnv(prev=>{
+        const next = {
+          rain: clamp(prev.rain + rand(-8,12), 0, 100),
+          temp: clamp(prev.temp + rand(-2,3), 25, 48),
+          aqi:  clamp(prev.aqi  + rand(-20,30), 50, 450),
+          orders: clamp(prev.orders + rand(-10,8), 10, 100),
+        };
+        return next;
+      });
+    }, 6000);
+    return ()=>clearInterval(simRef.current);
+  },[user,manual]);
+
+  /* ─── MANUAL OVERRIDE DETECTION ─── */
+  const triggerDisruption = useCallback((e) => {
+    const zone = ZONES[Math.floor(Math.random()*ZONES.length)];
+    setDisruption({...e});
+    setDisruptedZone(zone);
+    setDecision('approved');
+    const amt = clamp(rand(500,1500),500,1500);
+    setPayoutAmt(amt);
+    setPayoutHistory(ph=>[{id:ph.length+1,date:new Date().toLocaleDateString('en-IN'),amt,reason:e.rain>50?'Heavy Rain':e.temp>42?'Heat Wave':e.aqi>300?'High AQI':'Order Drop',status:'paid'},...ph.slice(0,9)]);
+    fetchAI(e);
+    setTimeout(()=>setShowPayout(true),1500);
+  },[fetchAI]);
+
+  const disruptionRef = useRef(disruption);
+  useEffect(()=>{ disruptionRef.current = disruption; },[disruption]);
+
+  useEffect(()=>{
+    if(!user) return;
+    const disrupted = isDisrupted(env);
+    if(disrupted && !disruptionRef.current) {
+      triggerDisruption(env);
+      setTrustScore(ts=>clamp(ts+rand(0,3),0,100));
+    } else if(!disrupted && disruptionRef.current) {
+      setDisruption(null);
+      setDisruptedZone(null);
+      setDecision(null);
+    }
+  },[env, user, isDisrupted, triggerDisruption]);
+
+  if(!user) return <Onboarding onLogin={(u,p)=>{setUser(u);setPlan(p);}} lang={lang} setLang={setLang}/>;
+
+  const expectedIncome = 900;
+  const actualIncome = Math.round(expectedIncome * (env.orders/100) * (disruption?0.45:1));
+  const planCost = plan==='weekly'?35:120;
+
+  /* ─── NAV ITEMS ─── */
+  const navItems = [
+    {id:'dashboard',icon:'📊',label:t.dashboard},
+    {id:'simulator',icon:'🎮',label:t.simulator},
+    {id:'coverage',icon:'🛡️',label:t.coverage},
+    {id:'history',icon:'📋',label:t.history},
+  ];
+
+  /* ─── DASHBOARD ─── */
+  const renderDashboard = () => (
+    <div style={{display:'flex',flexDirection:'column',gap:16}}>
+      {/* Disruption Banner */}
+      {disruption && (
+        <div className="disruption-banner animate-slide-up">
+          <div style={{fontSize:32,flexShrink:0,animation:'float 2s ease-in-out infinite'}}>⚠️</div>
+          <div style={{flex:1}}>
+            <div style={{fontWeight:700,fontSize:16,color:'var(--red)'}}>{t.disruption}</div>
+            <div style={{fontSize:13,color:'var(--text2)',marginTop:2}}>Auto-claim filed · {t.claimPending} · Payout in progress</div>
+          </div>
+          <div>
+            <div style={{fontFamily:'Space Grotesk,sans-serif',fontSize:24,fontWeight:800,color:'var(--green)',textAlign:'right'}}>{fmt(payoutAmt)}</div>
+            <div style={{fontSize:11,color:'var(--text2)',textAlign:'right'}}>Auto Payout</div>
+          </div>
+        </div>
+      )}
+      {/* Metrics Row */}
+      <div className="grid-4">
+        {[
+          {label:'Expected Income',val:fmt(expectedIncome),sub:'Today',color:'var(--accent)',icon:'💰'},
+          {label:'Actual Income',val:fmt(actualIncome),sub:disruption?'Reduced':'On Track',color:disruption?'var(--red)':'var(--green)',icon:'📈'},
+          {label:'Plan',val:plan==='weekly'?`₹${planCost}/wk`:`₹${planCost}/mo`,sub:'Active',color:'var(--accent2)',icon:'🛡️'},
+          {label:'Claims Today',val:payoutHistory.length,sub:'Processed',color:'var(--amber)',icon:'✅'},
+        ].map((m,i)=>(
+          <div key={i} className="card" style={{padding:'16px',transition:'all 0.3s',position:'relative',overflow:'hidden'}}>
+            <div style={{position:'absolute',top:-10,right:-10,fontSize:40,opacity:0.08}}>{m.icon}</div>
+            <div className="metric-label">{m.label}</div>
+            <div style={{fontFamily:'Space Grotesk,sans-serif',fontSize:22,fontWeight:700,color:m.color,marginTop:6,transition:'color 0.3s'}}>{m.val}</div>
+            <div style={{fontSize:11,color:'var(--text3)',marginTop:4}}>{m.sub}</div>
+          </div>
+        ))}
+      </div>
+      {/* Environment Cards */}
+      <div className="grid-4">
+        <EnvCard icon="🌧️" label={t.rain} value={env.rain} unit="mm" isAlert={env.rain>50} threshLabel=">50mm"/>
+        <EnvCard icon="🌡️" label={t.temp} value={env.temp} unit="°C" isAlert={env.temp>42} threshLabel=">42°C"/>
+        <EnvCard icon="💨" label={t.aqi} value={env.aqi} unit="AQI" isAlert={env.aqi>300} threshLabel=">300 AQI"/>
+        <EnvCard icon="📦" label={t.orders} value={env.orders} unit="%" isAlert={env.orders<40} threshLabel="<40%"/>
+      </div>
+      {/* Middle Section */}
+      <div className="grid-2">
+        <ZoneMap disruptedZone={disruptedZone} env={env} lang={lang}/>
+        <FraudPanel score={trustScore} env={env} lang={lang}/>
+      </div>
+      {/* AI Panel */}
+      {(disruption || aiText) && (
+        <AIPanel env={disruption||env} decision={decision} lang={lang} aiText={aiText}/>
+      )}
+      {/* Weekly Story */}
+      <WeekStory lang={lang}/>
+    </div>
+  );
+
+  /* ─── COVERAGE ─── */
+  const renderCoverage = () => (
+    <div style={{display:'flex',flexDirection:'column',gap:16}}>
+      <div className="card card-glow-blue">
+        <div className="section-title"><span>🛡️</span> Your Coverage</div>
+        <div className="grid-2" style={{marginBottom:16}}>
+          {[
+            {label:'Plan',val:plan==='weekly'?'Weekly Shield':'Monthly Shield',color:'var(--accent)'},
+            {label:'Premium',val:plan==='weekly'?'₹35/week':'₹120/month',color:'var(--accent2)'},
+            {label:'Max Payout',val:plan==='weekly'?'₹1,500/event':'₹2,000/event',color:'var(--green)'},
+            {label:'Status',val:'Active',color:'var(--green)'},
+          ].map((item,i)=>(
+            <div key={i} style={{padding:'14px',background:'var(--bg3)',borderRadius:10}}>
+              <div className="metric-label">{item.label}</div>
+              <div style={{fontFamily:'Space Grotesk,sans-serif',fontSize:18,fontWeight:700,color:item.color,marginTop:6}}>{item.val}</div>
+            </div>
+          ))}
+        </div>
+        <div className="section-title" style={{marginTop:4}}><span>🎯</span> Payout Triggers</div>
+        {[
+          {icon:'🌧️',label:'Rainfall > 50mm',desc:'Heavy rain halts deliveries',color:'#06b6d4'},
+          {icon:'🌡️',label:'Temperature > 42°C',desc:'Extreme heat health risk',color:'#f97316'},
+          {icon:'💨',label:'AQI > 300',desc:'Hazardous air quality',color:'#8b5cf6'},
+          {icon:'📦',label:'Orders < 40%',desc:'Platform demand collapse',color:'#f59e0b'},
+        ].map((item,i)=>(
+          <div key={i} style={{display:'flex',alignItems:'center',gap:12,padding:'12px 0',borderBottom:'1px solid var(--border)'}}>
+            <div style={{width:42,height:42,background:`rgba(${item.color==='#06b6d4'?'6,182,212':item.color==='#f97316'?'249,115,22':item.color==='#8b5cf6'?'139,92,246':'245,158,11'},0.15)`,borderRadius:10,display:'flex',alignItems:'center',justifyContent:'center',fontSize:20,flexShrink:0}}>{item.icon}</div>
+            <div>
+              <div style={{fontWeight:600,fontSize:14}}>{item.label}</div>
+              <div style={{fontSize:12,color:'var(--text2)',marginTop:2}}>{item.desc}</div>
+            </div>
+            <span className="tag tag-green" style={{marginLeft:'auto',fontSize:10}}>Active</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+
+  /* ─── HISTORY ─── */
+  const renderHistory = () => (
+    <div style={{display:'flex',flexDirection:'column',gap:16}}>
+      <div className="card">
+        <div className="section-title"><span>📋</span> Claim History</div>
+        {payoutHistory.length===0 && <div style={{color:'var(--text3)',fontSize:14,padding:'20px 0',textAlign:'center'}}>No claims yet. You're doing great!</div>}
+        {payoutHistory.map((p,i)=>(
+          <div key={p.id} className="animate-slide-up" style={{display:'flex',alignItems:'center',justifyContent:'space-between',padding:'14px 0',borderBottom:'1px solid var(--border)'}}>
+            <div style={{display:'flex',alignItems:'center',gap:12}}>
+              <div style={{width:40,height:40,background:'rgba(34,197,94,0.12)',border:'1px solid rgba(34,197,94,0.25)',borderRadius:10,display:'flex',alignItems:'center',justifyContent:'center',fontSize:18}}>✅</div>
+              <div>
+                <div style={{fontWeight:600,fontSize:14}}>{p.reason}</div>
+                <div style={{fontSize:12,color:'var(--text2)',marginTop:2}}>{p.date} · Auto Payout · UPI Transfer</div>
+              </div>
+            </div>
+            <div style={{textAlign:'right'}}>
+              <div style={{fontFamily:'Space Grotesk,sans-serif',fontSize:18,fontWeight:700,color:'var(--green)'}}>{fmt(p.amt)}</div>
+              <span className="tag tag-green" style={{fontSize:10,marginTop:4}}>Completed</span>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+
+  return (
+    <div style={{display:'flex',minHeight:'100vh'}}>
+      {/* Sidebar */}
+      <div className="sidebar" style={{background:'var(--bg2)',borderRight:'1px solid var(--border)',padding:'24px 16px',display:'flex',flexDirection:'column',position:'sticky',top:0,height:'100vh'}}>
+        <div style={{display:'flex',alignItems:'center',gap:10,marginBottom:32,padding:'0 4px'}}>
+          <div style={{width:36,height:36,background:'linear-gradient(135deg,var(--accent),var(--accent2))',borderRadius:10,display:'flex',alignItems:'center',justifyContent:'center',fontSize:18}}>🛡️</div>
+          <div>
+            <div className="font-display gradient-text" style={{fontSize:17,fontWeight:800}}>{t.appName}</div>
+            <div style={{fontSize:10,color:'var(--text3)',marginTop:1}}>v2.1 · Live</div>
+          </div>
+        </div>
+        <div style={{padding:'12px',background:'var(--bg3)',borderRadius:12,marginBottom:20,border:'1px solid var(--border)'}}>
+          <div style={{display:'flex',alignItems:'center',gap:8}}>
+            <div style={{width:34,height:34,background:'linear-gradient(135deg,#4f8ef7,#7c5cf4)',borderRadius:'50%',display:'flex',alignItems:'center',justifyContent:'center',fontSize:14,fontWeight:700,color:'white',flexShrink:0}}>{user?.name?.[0]||'R'}</div>
+            <div style={{flex:1,minWidth:0}}>
+              <div style={{fontWeight:600,fontSize:13,overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap'}}>{user?.name}</div>
+              <div style={{fontSize:11,color:'var(--text2)'}}>{user?.city}</div>
+            </div>
+            <div className="live-dot"/>
+          </div>
+          <div style={{marginTop:10,paddingTop:10,borderTop:'1px solid var(--border)',display:'flex',gap:10}}>
+            <div style={{flex:1,textAlign:'center'}}>
+              <div style={{fontSize:15,fontWeight:700,color:'var(--green)'}}>{Math.round(trustScore)}</div>
+              <div style={{fontSize:10,color:'var(--text3)'}}>Trust</div>
+            </div>
+            <div style={{flex:1,textAlign:'center'}}>
+              <div style={{fontSize:15,fontWeight:700,color:'var(--accent)'}}>{payoutHistory.length}</div>
+              <div style={{fontSize:10,color:'var(--text3)'}}>Claims</div>
+            </div>
+            <div style={{flex:1,textAlign:'center'}}>
+              <div style={{fontSize:15,fontWeight:700,color:'var(--accent2)'}}>{disruption?'ON':'OFF'}</div>
+              <div style={{fontSize:10,color:'var(--text3)'}}>Alert</div>
+            </div>
+          </div>
+        </div>
+        {navItems.map(n=>(
+          <div key={n.id} className={`nav-item ${activeTab===n.id?'active':''}`} onClick={()=>setActiveTab(n.id)}>
+            <span style={{fontSize:16}}>{n.icon}</span><span>{n.label}</span>
+          </div>
+        ))}
+        <div style={{marginTop:'auto',paddingTop:20,borderTop:'1px solid var(--border)'}}>
+          <div style={{display:'flex',justifyContent:'center',marginBottom:12}}>
+            <div className="lang-toggle">
+              {['en','hi'].map(l=>(
+                <div key={l} className={`lang-btn ${lang===l?'active':''}`} onClick={()=>setLang(l)}>{l==='en'?'EN':'हि'}</div>
+              ))}
+            </div>
+          </div>
+          <div className="nav-item" onClick={()=>setUser(null)} style={{justifyContent:'center',color:'var(--text3)'}}>
+            <span>🚪</span><span style={{fontSize:12}}>{t.logout}</span>
+          </div>
+        </div>
+      </div>
+
+      {/* Main Area */}
+      <div style={{flex:1,padding:'24px',overflowY:'auto',background:'var(--bg)'}}>
+        {/* Header */}
+        <div style={{display:'flex',alignItems:'center',justifyContent:'space-between',marginBottom:24}}>
+          <div>
+            <div className="font-display" style={{fontSize:24,fontWeight:700}}>{t.welcome}, {user?.name?.split(' ')[0]} 👋</div>
+            <div style={{color:'var(--text2)',fontSize:14,marginTop:4,display:'flex',alignItems:'center',gap:8}}>
+              <div className="live-dot"/>
+              {t.liveMonitor} · {disruption?<span style={{color:'var(--red)'}}>{t.disruption}</span>:<span style={{color:'var(--green)'}}>{t.covered}</span>}
+            </div>
+          </div>
+          <div style={{display:'flex',alignItems:'center',gap:10}}>
+            <button className="btn btn-outline" style={{fontSize:12,padding:'8px 14px'}} onClick={()=>{
+              setManual(m=>!m);
+              if(!manual) clearInterval(simRef.current);
+            }}>
+              {manual?'▶ Auto Sim':'⏸ Manual Mode'}
+            </button>
+            <button className="btn btn-primary" style={{fontSize:12,padding:'8px 14px'}} onClick={()=>{
+              if(disruption && payoutAmt>0) setShowPayout(true);
+            }} disabled={!disruption}>
+              💰 Claim {disruption?fmt(payoutAmt):''}
+            </button>
+          </div>
+        </div>
+
+        {/* Tab Content */}
+        {activeTab==='dashboard' && renderDashboard()}
+        {activeTab==='simulator' && (
+          <div style={{display:'flex',flexDirection:'column',gap:16}}>
+            <WhatIf env={env} setEnv={newEnv=>{setManual(true);setEnv(newEnv);}} lang={lang}/>
+            <div className="grid-2">
+              <div className="card">
+                <div className="section-title"><span>📊</span> Live Status</div>
+                {[
+                  {label:`${t.rain}: ${env.rain}mm`,val:env.rain,max:100,thresh:50,color:'#06b6d4',isAlert:env.rain>50},
+                  {label:`${t.temp}: ${env.temp}°C`,val:env.temp-20,max:30,thresh:22,color:'#f97316',isAlert:env.temp>42},
+                  {label:`${t.aqi}: ${env.aqi}`,val:env.aqi,max:500,thresh:300,color:'#8b5cf6',isAlert:env.aqi>300},
+                  {label:`${t.orders}: ${env.orders}%`,val:env.orders,max:100,thresh:40,color:'#f59e0b',isAlert:env.orders<40},
+                ].map((b,i)=>(
+                  <div key={i} style={{marginBottom:12}}>
+                    <div style={{display:'flex',justifyContent:'space-between',fontSize:12,marginBottom:4}}>
+                      <span style={{color:b.isAlert?b.color:'var(--text2)'}}>{b.label}</span>
+                      {b.isAlert && <span className="tag tag-red" style={{fontSize:9}}>ALERT</span>}
+                    </div>
+                    <div className="progress-bar">
+                      <div className="progress-fill" style={{width:`${(b.val/b.max)*100}%`,background:b.color,boxShadow:b.isAlert?`0 0 8px ${b.color}55`:''}}/>
+                    </div>
+                  </div>
+                ))}
+              </div>
+              <AIPanel env={env} decision={isDisrupted(env)?'approved':'rejected'} lang={lang} aiText={aiText}/>
+            </div>
+            <ZoneMap disruptedZone={disruptedZone} env={env} lang={lang}/>
+          </div>
+        )}
+        {activeTab==='coverage' && renderCoverage()}
+        {activeTab==='history' && renderHistory()}
+      </div>
+
+      {/* Payout Modal */}
+      {showPayout && <PayoutModal amount={payoutAmt} worker={user?.name} onClose={()=>setShowPayout(false)}/>}
+    </div>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById('root')).render(<GigShield/>);
+</script>
+</body>
+</html>
