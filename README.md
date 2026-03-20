@@ -44,53 +44,47 @@ The system:
 
 - Triggers instant payouts
 
-## 🧱Tech Stack
-
-Frontend: React.js
-
-Backend: Node.js, Express.js
-
-Database: MongoDB
-
-AI/ML: Python, Flask/FastAPI, scikit-learn
-
-APIs: OpenWeather API, AQI API, Traffic API 
-
-Monitoring: Cron Jobs / Scheduler
-
-Payment: Razorpay (Test Mode) 
-
-Tools: GitHub, Postman, VS Code
-
 ## 🏗️ System Architecture  
 
 <img width="1328" height="727" alt="Screenshot 2026-03-19 201242" src="https://github.com/user-attachments/assets/77e5bbba-9061-43f8-a64a-1b007f494723" />
 
-## 🚀 Why GigShield Stands Out
+## 🚀 Features
 
 - Hyperlocal Zone Intelligence
-  Detects disruptions at a micro-zone level (2–3 km), ensuring accurate identification of localized issues like waterlogging or traffic congestion.
+  Detects disruptions at micro-zone level (2–3 km) for accurate impact analysis  
 
-- Income-Based Dynamic Payout
-  Calculates expected earnings and compensates actual income loss instead of offering fixed payouts.
+- AI-Powered Risk Assessment
+  Predicts disruption probability using weather, location, and activity data  
 
-- Zero-Touch Claim System 
-  Fully automated process — no manual claims, instant detection, validation, and payout.
+- Dynamic Weekly Pricing
+  Adjusts premium based on real-time and historical risk factors  
 
-- Smart Trust Score Fraud Detection
-  Uses location consistency, activity patterns, and claim history to prevent fraudulent claims.
+- Zero-Touch Claim System
+  Automatically triggers claims without any manual request  
 
-### Trust Score-Based Fraud Detection
+- Parametric Trigger Mechanism
+  Payouts based on predefined conditions (rain, heat, pollution, order drop)  
 
-Each user is assigned a dynamic trust score based on:
+- Instant Payout Simulation
+  Quick compensation through UPI / Razorpay (mock integration)  
 
-- Location consistency
+- Advanced Fraud Detection 
+  Detects GPS spoofing, anomalies, and coordinated fraud patterns  
 
-- Activity patterns
+- Trust Score System 
+  Assigns dynamic trust score based on user behavior and activity  
 
-- Claim history
+- Real-Time Monitoring Engine
+  Continuously tracks weather, AQI, and order patterns  
 
-This ensures intelligent fraud prevention.
+- User Dashboard  
+  Displays premium, coverage, claims, and policy status  
+
+- Sustainable Business Model 
+  AI-driven risk balancing, controlled payouts, and fund optimization  
+
+- Platform Collaboration Ready 
+  Supports integration with Zepto, Blinkit, and Instamart for scalability  
 
 ## ⚙️ System Workflow
 
@@ -111,135 +105,37 @@ Fraud Validation (Trust Score + GPS)
       ↓
 Instant Payout (UPI)
 ```
+## 💰 Business Model & Sustainability
 
-## 💰 Weekly Pricing Model
+- **Weekly Subscription Model**  
+  Users pay ₹25–₹35 per week based on risk level  
 
-GigShield follows a weekly subscription model aligned with gig worker earnings.
+- **Revenue Generation**  
+  High number of users contributes to a pooled fund  
 
-```
-User Data (Location + Activity)
-↓
-Base Premium (₹20/week)
-↓
-Risk Adjustments
-(Flood +₹5 | Pollution +₹3 | Traffic +₹2)
-↓
-AI Pricing Engine
-(Weather + History + Patterns)
-↓
-Final Premium (₹25–₹35/week)
-↓
-Coverage Allocation
-(₹500 – ₹1500/week)
+- **Risk Distribution**  
+  Not all users claim at the same time, ensuring balance  
 
-```
+- **Controlled Payouts**  
+  Coverage limited to ₹500–₹1500 to avoid heavy losses  
 
-## ⚡ Parametric Triggers
+- **AI-Based Pricing**  
+  Premium adjusts dynamically based on weather, location, and activity  
 
-GigShield uses predefined measurable triggers:
+- **Fraud Prevention**  
+  Trust score and anomaly detection reduce false claims  
 
-| Disruption | Condition | Action |
-|-----------|----------|--------|
-| Heavy Rain | Rainfall > 50mm | Auto payout |
-| HeatWave | Temperature > 42C | Auto payout |
-| Order Drop |  < 40% normal orders | Auto payout |
-| Pollution | AQI > 300 | Auto payout |
-| Zone Shutdown | No activity in Zpne | Auto payout |
+- **Predictive Risk Management**  
+  AI forecasts disruptions and controls payouts  
 
-## 🤖 AI/ML Integration
+- **Platform Partnerships**  
+  Collaboration with Zepto, Blinkit, Instamart for scalability  
 
-1. Risk Assessment Model
+- **Scalability**  
+  Can expand to multiple cities and gig sectors  
 
-   Predicts disruption probability
-
-   Inputs: location, weather, historical data
-
-2. Dynamic Pricing Engine
-
-   Adjusts weekly premium
-
-   Based on predicted risk
-
-3. Income Prediction Model 
-
-   Estimates expected earnings
-
-   Calculates actual income loss
-
-4. Fraud Detection System
-
-   Detects anomalies using ML
-
-   Prevents misuse and fake claims
-
-## 🛡️ Fraud Detection Strategy
-
-GPS location validation
-
-Activity consistency checks
-
-Duplicate claim prevention
-
-Trust score evaluation
-
-Anomaly detection (ML-based)
-
-## 🛡️ Adversarial Defense & Anti-Spoofing Strategy  
-
-To counter advanced GPS spoofing and coordinated fraud attacks, GigShield uses a **multi-layered behavioral intelligence system**.
-
-### 🔍 Differentiation (Real vs Fake)
-- Movement pattern vs static spoofed location  
-- Delivery activity validation  
-- Behavioral consistency analysis  
-
-### 📊 Data Signals Used
-- GPS trajectory (not just location)  
-- Order activity & timestamps  
-- App usage patterns  
-- Network anomalies  
-- Zone-level disruption correlation  
-
-### 🤖 AI Defense
-- Anomaly detection (Isolation Forest)  
-- Dynamic **Trust Score system**  
-- Fraud pattern recognition  
-
-### ⚖️ UX Balance
-- Auto-approved (high trust)  
-- Soft verification (medium risk)  
-- Rejected (high fraud probability)  
-
-### 🧠 Anti-Collusion Detection
-- Detects clustered fake claims  
-- Identifies synchronized behavior  
-- Monitors sudden spike in same zone  
-
-Prevents large-scale fraud attacks like coordinated spoofing rings  
-
-## 🧭 Customer Journey
-```
-Awareness
-      ↓
-Onboarding
-      ↓
-AI Profiling
-      ↓
-Plan Selection
-      ↓
-Activation
-      ↓
-Monitoring
-      ↓
-Disruption
-      ↓
-Auto Claim
-      ↓
-Payout
-      ↓
-Dashboard
-
-```
+- **Sustainability Focus**  
+  Balances revenue, risk, and payouts using AI-driven decisions  
 
 ## 🎯 Conclusion
 
