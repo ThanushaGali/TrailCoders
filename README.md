@@ -50,40 +50,40 @@ The system:
 
 ## 🚀 Features
 
-- Hyperlocal Zone Intelligence
+- **Hyperlocal Zone Intelligence**  
   Detects disruptions at micro-zone level (2–3 km) for accurate impact analysis  
 
-- AI-Powered Risk Assessment
+- **AI-Powered Risk Assessment**  
   Predicts disruption probability using weather, location, and activity data  
 
-- Dynamic Weekly Pricing
+- **Dynamic Weekly Pricing**  
   Adjusts premium based on real-time and historical risk factors  
 
-- Zero-Touch Claim System
+- **Zero-Touch Claim System**  
   Automatically triggers claims without any manual request  
 
-- Parametric Trigger Mechanism
+- **Parametric Trigger Mechanism**  
   Payouts based on predefined conditions (rain, heat, pollution, order drop)  
 
-- Instant Payout Simulation
+- **Instant Payout Simulation**  
   Quick compensation through UPI / Razorpay (mock integration)  
 
-- Advanced Fraud Detection 
+- **Advanced Fraud Detection**  
   Detects GPS spoofing, anomalies, and coordinated fraud patterns  
 
-- Trust Score System 
+- **Trust Score System**  
   Assigns dynamic trust score based on user behavior and activity  
 
-- Real-Time Monitoring Engine
+- **Real-Time Monitoring Engine**  
   Continuously tracks weather, AQI, and order patterns  
 
-- User Dashboard  
+- **User Dashboard**  
   Displays premium, coverage, claims, and policy status  
 
-- Sustainable Business Model 
+- **Sustainable Business Model**  
   AI-driven risk balancing, controlled payouts, and fund optimization  
 
-- Platform Collaboration Ready 
+- **Platform Collaboration Ready**  
   Supports integration with Zepto, Blinkit, and Instamart for scalability  
 
 ## ⚙️ System Workflow
