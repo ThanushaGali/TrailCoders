@@ -10,7 +10,12 @@
   - Olivia Mallampalli
  
 ## 🎥 Video
-[Watch Here](video-link)
+[Watch Here](https://drive.google.com/file/d/1L3C0nfKwRUBc6Y_IS_33rAsmlTCEgvJd/view?usp=drivesdk)
+
+## 🖥️ Prototype
+
+Project Link: https://github.com/soumikadevarakonda/Gig-Shield
+Live Demo: https://gig-shield-livid.vercel.app/
 
 ## 📌 Problem Statement
 
